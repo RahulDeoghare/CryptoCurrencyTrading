@@ -20,5 +20,3 @@ Contributions are welcome. Fork the repo and create a pull request.
 ## License
 This project is licensed under the MIT License.
 
-## Contact
-For inquiries, email me at [your-email@example.com].
