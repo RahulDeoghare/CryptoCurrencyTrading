@@ -6,7 +6,9 @@ This project is designed for traders and developers interested in the Indian sto
 ## Installation
 Clone the repository and install dependencies:
 git clone https://github.com/RahulDeoghare/IndianStockTrading
+
 cd IndianStockTrading
+
 npm install
 
 ## Usage
