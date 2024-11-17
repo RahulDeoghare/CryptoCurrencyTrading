@@ -1,4 +1,5 @@
 export interface Asset {
+  sector: any;
   symbol: string;
   name: string;
   price: number;

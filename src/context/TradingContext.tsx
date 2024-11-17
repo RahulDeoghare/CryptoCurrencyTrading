@@ -24,11 +24,11 @@ export function TradingProvider({ children }: { children: React.ReactNode }) {
   useEffect(() => {
     // Initialize with mock data
     const initialAssets: Asset[] = [
-      { symbol: 'BTC/USD', name: 'Bitcoin', price: 45825, change24h: 2.5, volume: 28000000000, marketCap: 890000000000 },
-      { symbol: 'ETH/USD', name: 'Ethereum', price: 2890, change24h: 1.8, volume: 15000000000, marketCap: 345000000000 },
-      { symbol: 'SOL/USD', name: 'Solana', price: 98, change24h: 3.2, volume: 2800000000, marketCap: 42000000000 },
-      { symbol: 'AAPL', name: 'Apple Inc.', price: 182, change24h: -0.5, volume: 1200000000, marketCap: 2800000000000 },
-      { symbol: 'GOOGL', name: 'Alphabet Inc.', price: 142, change24h: 1.2, volume: 890000000, marketCap: 1800000000000 },
+      { symbol: 'BTC/USD', name: 'Bitcoin', price: 45825, change24h: 2.5, volume: 28000000000, marketCap: 890000000000, sector: 'Cryptocurrency' },
+      { symbol: 'ETH/USD', name: 'Ethereum', price: 2890, change24h: 1.8, volume: 15000000000, marketCap: 345000000000, sector: 'Cryptocurrency' },
+      { symbol: 'SOL/USD', name: 'Solana', price: 98, change24h: 3.2, volume: 2800000000, marketCap: 42000000000, sector: 'Cryptocurrency' },
+      { symbol: 'AAPL', name: 'Apple Inc.', price: 182, change24h: -0.5, volume: 1200000000, marketCap: 2800000000000, sector: 'Technology' },
+      { symbol: 'GOOGL', name: 'Alphabet Inc.', price: 142, change24h: 1.2, volume: 890000000, marketCap: 1800000000000, sector: 'Technology' },
     ];
     setAssets(initialAssets);
     setSelectedAsset(initialAssets[0]);
@@ -124,3 +124,4 @@ export function useTradingContext() {
   }
   return context;
 }
+
