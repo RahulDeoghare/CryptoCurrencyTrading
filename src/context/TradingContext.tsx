@@ -1,15 +1,17 @@
 import React, { createContext, useContext, useState, useEffect } from 'react';
 import { Asset, Trade, Portfolio } from '../types';
-import { generateMockPriceUpdates } from '../utils/mockData';
+import { generateMockPriceUpdates, NIFTY50_STOCKS } from '../utils/mockData';
 
 interface TradingContextType {
   selectedAsset: Asset | null;
-  setSelectedAsset: (asset: Asset) => void;
+  setSelectedAsset: (asset: Asset | null) => void; // Updated type here
   assets: Asset[];
   portfolio: Portfolio[];
   trades: Trade[];
   executeOrder: (type: 'buy' | 'sell', amount: number, price?: number) => void;
   balance: number;
+  addFunds: (amount: number) => void;
+  addNotification: (title: string, message: string) => void;
 }
 
 const TradingContext = createContext<TradingContextType | null>(null);
@@ -19,17 +21,17 @@ export function TradingProvider({ children }: { children: React.ReactNode }) {
   const [assets, setAssets] = useState<Asset[]>([]);
   const [portfolio, setPortfolio] = useState<Portfolio[]>([]);
   const [trades, setTrades] = useState<Trade[]>([]);
-  const [balance, setBalance] = useState(100000); // Start with $100,000 USD
+  const [balance, setBalance] = useState(100000); // Start with ₹100,000
 
   useEffect(() => {
-    // Initialize with mock data
-    const initialAssets: Asset[] = [
-      { symbol: 'BTC/USD', name: 'Bitcoin', price: 45825, change24h: 2.5, volume: 28000000000, marketCap: 890000000000, sector: 'Cryptocurrency' },
-      { symbol: 'ETH/USD', name: 'Ethereum', price: 2890, change24h: 1.8, volume: 15000000000, marketCap: 345000000000, sector: 'Cryptocurrency' },
-      { symbol: 'SOL/USD', name: 'Solana', price: 98, change24h: 3.2, volume: 2800000000, marketCap: 42000000000, sector: 'Cryptocurrency' },
-      { symbol: 'AAPL', name: 'Apple Inc.', price: 182, change24h: -0.5, volume: 1200000000, marketCap: 2800000000000, sector: 'Technology' },
-      { symbol: 'GOOGL', name: 'Alphabet Inc.', price: 142, change24h: 1.2, volume: 890000000, marketCap: 1800000000000, sector: 'Technology' },
-    ];
+    // Initialize with Indian stocks
+    const initialAssets = NIFTY50_STOCKS.map(stock => ({
+      ...stock,
+      change24h: 0,
+      volume: Math.random() * 1000000,
+      marketCap: stock.price * 1000000000
+    }));
+    
     setAssets(initialAssets);
     setSelectedAsset(initialAssets[0]);
 
@@ -47,6 +49,18 @@ export function TradingProvider({ children }: { children: React.ReactNode }) {
     return cleanup;
   }, []);
 
+  const addFunds = (amount: number) => {
+    setBalance(prev => prev + amount);
+    addNotification('Funds Added', `₹${amount.toLocaleString()} has been added to your account`);
+  };
+
+  const addNotification = (title: string, message: string) => {
+    const event = new CustomEvent('newNotification', {
+      detail: { title, message, time: new Date().toISOString() }
+    });
+    window.dispatchEvent(event);
+  };
+
   const executeOrder = (type: 'buy' | 'sell', amount: number, price?: number) => {
     if (!selectedAsset) return;
 
@@ -55,17 +69,19 @@ export function TradingProvider({ children }: { children: React.ReactNode }) {
 
     if (type === 'buy') {
       if (total > balance) {
-        alert('Insufficient funds');
+        addNotification('Order Failed', 'Insufficient funds for this transaction');
         return;
       }
       setBalance(prev => prev - total);
+      addNotification('Order Executed', `Successfully bought ${amount} shares of ${selectedAsset.symbol} at ${formatIndianCurrency(orderPrice)}`);
     } else {
       const assetInPortfolio = portfolio.find(p => p.asset === selectedAsset.symbol);
       if (!assetInPortfolio || assetInPortfolio.amount < amount) {
-        alert('Insufficient assets');
+        addNotification('Order Failed', 'Insufficient shares for this transaction');
         return;
       }
       setBalance(prev => prev + total);
+      addNotification('Order Executed', `Successfully sold ${amount} shares of ${selectedAsset.symbol} at ${formatIndianCurrency(orderPrice)}`);
     }
 
     // Update portfolio
@@ -111,6 +127,8 @@ export function TradingProvider({ children }: { children: React.ReactNode }) {
       trades,
       executeOrder,
       balance,
+      addFunds,
+      addNotification
     }}>
       {children}
     </TradingContext.Provider>
@@ -125,3 +143,12 @@ export function useTradingContext() {
   return context;
 }
 
+// Removed duplicate function implementation
+function formatIndianCurrency(amount: number) {
+  return new Intl.NumberFormat('en-IN', {
+    style: 'currency',
+    currency: 'INR',
+    minimumFractionDigits: 2,
+    maximumFractionDigits: 2,
+  }).format(amount);
+}

@@ -1,11 +1,11 @@
 export interface Asset {
-  sector: any;
   symbol: string;
   name: string;
   price: number;
   change24h: number;
   volume: number;
   marketCap: number;
+  sector: string;
 }
 
 export interface Trade {
