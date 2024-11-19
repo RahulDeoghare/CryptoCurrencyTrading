@@ -16,11 +16,11 @@ export function UserProfile() {
     phone: '+91 98765 43210',
     accountType: 'Premium',
     kycStatus: 'Verified',
-    joinDate: 'January 2024',
+    joinDate: 'January 2020',
     tradingExperience: '3+ years',
     bankAccounts: [
-      { bank: 'HDFC Bank', accountNo: '****6789', primary: true },
-      { bank: 'ICICI Bank', accountNo: '****4321', primary: false }
+      { bank: 'HDFC Bank', accountNo: '****6789', primary: false },
+      { bank: 'ICICI Bank', accountNo: '****4321', primary: true }
     ],
     cards: [
       { type: 'Credit Card', number: '****8765', expiry: '12/25' }
