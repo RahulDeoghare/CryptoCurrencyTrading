@@ -7,20 +7,6 @@ import { formatIndianCurrency } from '../utils/mockData';
 export function Markets() {
   const { assets } = useTradingContext();
 
-  // Calculate market statistics
-  const marketStats = {
-    nifty50: {
-      value: 21845.25,
-      change: 0.75,
-      trending: 'up'
-    },
-    sensex: {
-      value: 72012.15,
-      change: 0.68,
-      trending: 'up'
-    }
-  };
-
   // Group stocks by sector
   const stocksBySection = assets.reduce((acc, stock) => {
     if (!acc[stock.sector]) {
@@ -34,39 +20,6 @@ export function Markets() {
     <div className="space-y-8">
       <MarketStatus />
       
-      {/* Market Overview */}
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-        <div className="bg-gray-800 rounded-lg p-6">
-          <div className="flex justify-between items-start">
-            <div>
-              <h3 className="text-gray-400">NIFTY 50</h3>
-              <p className="text-2xl font-bold text-white mt-1">
-                {marketStats.nifty50.value.toLocaleString()}
-              </p>
-            </div>
-            <div className={`flex items-center ${marketStats.nifty50.trending === 'up' ? 'text-green-500' : 'text-red-500'}`}>
-              {marketStats.nifty50.trending === 'up' ? <ArrowUpRight className="w-5 h-5" /> : <ArrowDownRight className="w-5 h-5" />}
-              <span className="ml-1">{marketStats.nifty50.change}%</span>
-            </div>
-          </div>
-        </div>
-
-        <div className="bg-gray-800 rounded-lg p-6">
-          <div className="flex justify-between items-start">
-            <div>
-              <h3 className="text-gray-400">SENSEX</h3>
-              <p className="text-2xl font-bold text-white mt-1">
-                {marketStats.sensex.value.toLocaleString()}
-              </p>
-            </div>
-            <div className={`flex items-center ${marketStats.sensex.trending === 'up' ? 'text-green-500' : 'text-red-500'}`}>
-              {marketStats.sensex.trending === 'up' ? <ArrowUpRight className="w-5 h-5" /> : <ArrowDownRight className="w-5 h-5" />}
-              <span className="ml-1">{marketStats.sensex.change}%</span>
-            </div>
-          </div>
-        </div>
-      </div>
-
       {/* Sector-wise Performance */}
       <div className="bg-gray-800 rounded-lg p-6">
         <h2 className="text-xl font-bold text-white mb-6">Sector-wise Performance</h2>
@@ -132,5 +85,3 @@ export function Markets() {
     </div>
   );
 }
-
-export default Markets;

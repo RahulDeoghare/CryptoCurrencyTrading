@@ -22,6 +22,6 @@ export default defineConfig({
     }
   },
   optimizeDeps: {
-    force: true
+    include: ['lucide-react']
   }
 });

@@ -20,7 +20,7 @@ export function Header() {
             <span className="ml-2 text-xl font-bold text-white">TradeSmart</span>
           </Link>
 
-          <nav className="hidden md:flex space-x-8">
+          <nav className="hidden md:flex space-x-6">
             <Link to="/markets" className={`${isActive('/markets')} px-3 py-2 rounded-md text-sm font-medium`}>
               Markets
             </Link>
@@ -29,6 +29,15 @@ export function Header() {
             </Link>
             <Link to="/portfolio" className={`${isActive('/portfolio')} px-3 py-2 rounded-md text-sm font-medium`}>
               Portfolio
+            </Link>
+            <Link to="/analysis" className={`${isActive('/analysis')} px-3 py-2 rounded-md text-sm font-medium`}>
+              Analysis
+            </Link>
+            <Link to="/ipo" className={`${isActive('/ipo')} px-3 py-2 rounded-md text-sm font-medium`}>
+              IPO
+            </Link>
+            <Link to="/education" className={`${isActive('/education')} px-3 py-2 rounded-md text-sm font-medium`}>
+              Education
             </Link>
           </nav>
 
