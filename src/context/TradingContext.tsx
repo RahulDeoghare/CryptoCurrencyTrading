@@ -1,4 +1,5 @@
-import React, { createContext, useContext, useState, useEffect } from 'react';
+import * as React from 'react';
+import { createContext, useContext, useState, useEffect } from 'react';
 import { Asset, Trade, Portfolio } from '../types';
 import { generateMockPriceUpdates, NIFTY50_STOCKS } from '../utils/mockData';
 

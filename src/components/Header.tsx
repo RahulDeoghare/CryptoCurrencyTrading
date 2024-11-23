@@ -1,4 +1,4 @@
-import React from 'react';
+import * as React from 'react';
 import { TrendingUp } from 'lucide-react';
 import { Link, useLocation } from 'react-router-dom';
 import { NotificationsDialog } from './Notifications';

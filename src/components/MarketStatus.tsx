@@ -1,4 +1,5 @@
-import React, { useState, useEffect } from 'react';
+import * as React from 'react';
+import { useState, useEffect } from 'react';
 import { getMarketStatus, formatIndianCurrency } from '../utils/mockData';
 import { TrendingUp, TrendingDown } from 'lucide-react';
 

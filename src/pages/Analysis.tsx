@@ -1,4 +1,4 @@
-import React from 'react';
+import * as React from 'react';
 import { TradingChart } from '../components/TradingChart';
 import { useTradingContext } from '../context/TradingContext';
 import { TrendingUp, TrendingDown, Activity, BarChart3 } from 'lucide-react';

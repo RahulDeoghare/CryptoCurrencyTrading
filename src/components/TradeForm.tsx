@@ -1,4 +1,5 @@
-import React, { useState } from 'react';
+import * as React from 'react';
+import { useState } from 'react';
 import { useTradingContext } from '../context/TradingContext';
 import { formatIndianCurrency } from '../utils/mockData';
 import { Search } from 'lucide-react';

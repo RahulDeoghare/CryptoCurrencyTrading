@@ -1,4 +1,4 @@
-import React from 'react';
+import * as React from 'react';
 import { MarketStatus } from '../components/MarketStatus';
 import { useTradingContext } from '../context/TradingContext';
 import { ArrowUpRight, ArrowDownRight, TrendingUp, TrendingDown } from 'lucide-react';

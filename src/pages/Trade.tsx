@@ -1,4 +1,4 @@
-import React from 'react';
+import * as React from 'react';
 import { TradingChart } from '../components/TradingChart';
 import { TradeForm } from '../components/TradeForm';
 import { OrderBook } from '../components/OrderBook';

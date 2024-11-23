@@ -1,4 +1,4 @@
-import React from 'react';
+import * as React from 'react';
 import { useTradingContext } from '../context/TradingContext';
 import { ArrowUpRight, ArrowDownRight } from 'lucide-react';
 

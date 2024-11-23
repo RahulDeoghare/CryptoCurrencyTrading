@@ -1,4 +1,5 @@
-import React, { useState } from 'react';
+import * as React from 'react';
+import { useState } from 'react';
 import { useTradingContext } from '../context/TradingContext';
 import { formatIndianCurrency, calculateReturns, calculateReturnPercentage } from '../utils/mockData';
 import * as Dialog from '@radix-ui/react-dialog';
